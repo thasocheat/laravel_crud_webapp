@@ -28,7 +28,7 @@
               <ul class="submenu-inner">
 
                 <li class="nav-item">
-                  <a href="{{route('department.index')}}" class="nav-link">
+                  <a href="{{route('admin.department.index')}}" class="nav-link">
                     <span class="nav-text">
                    <span>View Departments</span>
                     </span>

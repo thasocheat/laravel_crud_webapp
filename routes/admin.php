@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DepartmentsController;
-use Illuminate\Support\Facades\Auth;
+// use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 
@@ -9,7 +9,6 @@ use App\Http\Controllers\HomeController;
 
 
 
-Auth::routes();
 
 /*------------------------------------------
 --------------------------------------------
@@ -27,9 +26,11 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
 All Admin Routes List
 --------------------------------------------
 --------------------------------------------*/
-Route::middleware(['auth', 'user-access:admin'])->group(function () {
+// Route::middleware(['auth', 'user-access:admin'])->group(function () {
+    Route::get('/home', [HomeController::class, 'adminHome'])->name('admin.home');
+Route::group(['prefix'=>'admin','as'=>'admin.','middleware'=>['auth']],function(){
+
   
-    Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
 
 
 

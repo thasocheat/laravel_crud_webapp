@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Models\Home\departments;
+use App\Models\Home\Departments;
 use App\Http\Controllers\Controller;
 // use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -19,7 +19,7 @@ class DepartmentsController extends Controller
       // Get all data from departments table
       $data['crudRoutePath'] = $this->crudRoutePath;
       $data['prefix'] = $this->prefix;
-      $data['departments'] = departments::all();
+      $data['departments'] = Departments::all();
       return view('admin.department.index', $data);
     }
 
@@ -55,11 +55,11 @@ class DepartmentsController extends Controller
         }
         $all_data =[
           'name'=>$request->name,
-          'slug'=>$request->code,
+          'slug'=>$request->slug,
           'image'=>$image_name,
         ];
         // return response()->json($all_data);
-          $datas   =   departments::updateOrCreate([
+          $datas   =   Departments::updateOrCreate([
           'id' => $object_id], //id ជា id របស់ table service
           $all_data);
 
@@ -88,8 +88,9 @@ class DepartmentsController extends Controller
 
   public function edit($id)
   {
+    $departments = Departments::findOrFail($id);
     $response = [
-      'data'  => departments::findOrFail($id)
+      'data'  => $departments
     ];
     return response()->json($response);
   }
@@ -97,7 +98,7 @@ class DepartmentsController extends Controller
   public function show($id)
   {
     // abort_if(Gate::denies($this->prefix.'show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-    $departments = departments::findOrFail($id);
+    $departments = Departments::findOrFail($id);
     $response = [
       'data'  => $departments
     ];
@@ -107,7 +108,7 @@ class DepartmentsController extends Controller
   public function destroy($id)
   {
     // abort_if(Gate::denies($this->prefix.'delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-    $departments = departments::find($id);
+    $departments = Departments::find($id);
     $departments->delete();
 
     $response = [

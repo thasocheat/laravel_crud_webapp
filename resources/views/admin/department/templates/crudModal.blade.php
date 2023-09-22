@@ -1,7 +1,7 @@
 <div class="modal fade" id="crudObjectModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
-      <form id="frmCrudObject" action="{{ route($crudRoutePath.'.store') }}" method="post" enctype="multipart/form-data">
+      <form id="frmCrudObject" action="{{ route('admin.'.$crudRoutePath.'.store') }}" method="post" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="modal-header bg-primary text-white">
           <h5 class="modal-title"></h5>
