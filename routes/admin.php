@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DepartmentsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -29,6 +30,12 @@ All Admin Routes List
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
   
     Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
+
+
+
+    // Department Routes
+    Route::resource('department', App\Http\Controllers\Admin\DepartmentsController::class)->except('create','update');
+
 });
   
 /*------------------------------------------

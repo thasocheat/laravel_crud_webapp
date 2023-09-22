@@ -30,18 +30,18 @@
     </div> --}}
 
     <!-- Humberger Begin -->
-    @include('layouts.partrials.front.humber')
+    @include('layouts.partials.front.humber')
     
     <!-- Humberger End -->
 
     <!-- Header Section Begin -->
-    @include('layouts.partrials.front.header')
+    @include('layouts.partials.front.header')
     <!-- Header Section End -->
 
     @yield('front_content')    
 
     <!-- Footer Section Begin -->
-    @include('layouts.partrials.front.footer')
+    @include('layouts.partials.front.footer')
     
     <!-- Footer Section End -->
 
