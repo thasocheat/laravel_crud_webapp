@@ -15,13 +15,13 @@ use App\Http\Controllers\HomeController;
 |
 */
 
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('frontpage.index');
 });
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 /*------------------------------------------
 --------------------------------------------
@@ -32,24 +32,24 @@ All Normal Users Routes List
   
 //     Route::get('/home', [HomeController::class, 'index'])->name('home');
 // });
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+// Route::get('/home', [HomeController::class, 'index'])->name('home');
   
-/*------------------------------------------
---------------------------------------------
-All Admin Routes List
---------------------------------------------
---------------------------------------------*/
-Route::middleware(['auth', 'user-access:admin'])->group(function () {
+// /*------------------------------------------
+// --------------------------------------------
+// All Admin Routes List
+// --------------------------------------------
+// --------------------------------------------*/
+// Route::middleware(['auth', 'user-access:admin'])->group(function () {
   
-    Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
-});
+//     Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
+// });
   
-/*------------------------------------------
---------------------------------------------
-All Admin Routes List
---------------------------------------------
---------------------------------------------*/
-Route::middleware(['auth', 'user-access:manager'])->group(function () {
+// /*------------------------------------------
+// --------------------------------------------
+// All Admin Routes List
+// --------------------------------------------
+// --------------------------------------------*/
+// Route::middleware(['auth', 'user-access:manager'])->group(function () {
   
-    Route::get('/manager/home', [HomeController::class, 'managerHome'])->name('manager.home');
-});
+//     Route::get('/manager/home', [HomeController::class, 'managerHome'])->name('manager.home');
+// });
