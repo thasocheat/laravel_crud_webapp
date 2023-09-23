@@ -3,7 +3,7 @@
     <div class="ace-scroll flex-grow-1" data-ace-scroll="{}">
 
       <ul class="nav has-active-border active-on-right">
-        {{-- Dashboard --}}
+        
         <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="nav-icon fa fa-tachometer-alt"></i>
@@ -60,10 +60,6 @@
             <a href="#" class="d-style btn btn-outline-primary btn-h-light-primary btn-a-light-primary border-0 p-2 mr-2px ml-4" title="Settings" data-toggle="modal" data-target="#id-ace-settings-modal">
               <i class="fa fa-cog text-150 text-blue-d2 f-n-hover"></i>
             </a>
-
-            {{-- <a href="{{route('logout')}}" class="d-style btn btn-outline-orange btn-h-light-orange btn-a-light-orange border-0 p-2 mr-1" title="Logout">
-              <i class="fa fa-sign-out-alt text-150 text-orange-d2 f-n-hover"></i>
-            </a> --}}
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 @extends('layouts.back_master')
 
-@push('vendor-styles')
+{{-- @push('vendor-styles')
   <link href="{{asset('backend2')}}/vendors/select2/dist/css/select2.css" rel="stylesheet" />
   <!--Data Tables -->
   <link href="{{asset('backend2')}}/vendors/bootstrap-datatable/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
@@ -25,7 +25,7 @@
       content: "Off";
     }
   </style>
-@endpush
+@endpush --}}
 
 @section('admin_content')
   @section('breadcrumb')
@@ -147,7 +147,7 @@ data-bs-backdrop="static" aria-hidden="true">
 </div>
 @endsection
 
-@push('vendor-scripts')
+{{-- @push('vendor-scripts')
   <script src="{{asset('backend2')}}/vendors/select2/dist/js/select2.js"></script>
     <!--Data Tables js-->
   <script src="{{asset('backend2')}}/vendors/bootstrap-datatable/js/jquery.dataTables.min.js"></script>
@@ -160,7 +160,7 @@ data-bs-backdrop="static" aria-hidden="true">
   <script src="{{asset('backend2')}}/vendors/bootstrap-datatable/js/buttons.html5.min.js"></script>
   <script src="{{asset('backend2')}}/vendors/bootstrap-datatable/js/buttons.print.min.js"></script>
   <script src="{{asset('backend2')}}/vendors/bootstrap-datatable/js/buttons.colVis.min.js"></script>
-@endpush
+@endpush --}}
 
 @push('page-scripts')
   <script src="{{asset('backend2')}}/vendors/toastrjs/toastr.min.js"></script>
@@ -213,7 +213,7 @@ data-bs-backdrop="static" aria-hidden="true">
             $("#name").val(response.name);
             $("#slug").val(response.slug);
             $("#image").html(
-              `<img src="storage/images/${response.image}" width="100" class="img-fluid img-thumbnail">`);
+              `<img src="storage/images_department/${response.image}" width="100" hight="auto" class="img-fluid img-thumbnail">`);
             $("#dep_id").val(response.id);
             $("#dep_image").val(response.image);
           }

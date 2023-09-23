@@ -132,7 +132,7 @@
           const fd = new FormData(this);
           $("#add_department_btn").text('Adding...');
           $.ajax({
-            url: '{{ route('admin.store') }}',
+            url: '{{ route('store') }}',
             method: 'post',
             data: fd,
             cache: false,
@@ -160,7 +160,7 @@
           e.preventDefault();
           let id = $(this).attr('id');
           $.ajax({
-            url: '{{ route('admin.edit') }}',
+            url: '{{ route('edit') }}',
             method: 'get',
             data: {
               id: id,
@@ -183,7 +183,7 @@
           const fd = new FormData(this);
           $("#edit_department_btn").text('Updating...');
           $.ajax({
-            url: '{{ route('admin.update') }}',
+            url: '{{ route('update') }}',
             method: 'post',
             data: fd,
             cache: false,
@@ -222,7 +222,7 @@
           }).then((result) => {
             if (result.isConfirmed) {
               $.ajax({
-                url: '{{ route('admin.delete') }}',
+                url: '{{ route('delete') }}',
                 method: 'delete',
                 data: {
                   id: id,
@@ -247,10 +247,10 @@
   
         function fetchAllEmployees() {
           $.ajax({
-            url: '{{ route('admin.fetchAll') }}',
+            url: '{{ route('fetchAll') }}',
             method: 'get',
             success: function(response) {
-              $("#show_all_employees").html(response);
+              $("#show_all_departments").html(response);
               $("table").DataTable({
                 order: [0, 'desc']
               });
