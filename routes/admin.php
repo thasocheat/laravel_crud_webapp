@@ -28,6 +28,9 @@ All Admin Routes List
 --------------------------------------------*/
 // Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/home', [HomeController::class, 'adminHome'])->name('admin.home');
+
+    // Route to check image department
+    Route::get('/check/image', [HomeController::class, 'checkImageExists'])->name('checkImageExists');
 // Route::group(['prefix'=>'admin','as'=>'admin.','middleware'=>['auth']],function(){
 
   

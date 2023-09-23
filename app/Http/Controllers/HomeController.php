@@ -35,4 +35,23 @@ class HomeController extends Controller
     {
         return view('managerHome');
     }
+
+    public function checkImageExists(){
+        // Get the image file name from the request
+        $imageFileName = $_GET['image'];
+
+        // Define the directory where the images are stored
+        $imageDirectory = 'storage/images_department';
+
+        $imageFilePath = $imageDirectory . $imageFileName;
+
+        error_log("Checking image existence for: " . $imageFilePath);
+        // Check
+        if(file_exists($imageFilePath)){
+            echo 'true';
+        }else{
+            echo 'false';
+        }
+
+    }
 }

@@ -212,8 +212,36 @@ data-bs-backdrop="static" aria-hidden="true">
           success: function(response) {
             $("#name").val(response.name);
             $("#slug").val(response.slug);
-            $("#image").html(
-              `<img src="storage/images_department/${response.image}" width="100" hight="auto" class="img-fluid img-thumbnail">`);
+
+            if(response.image){
+
+              $.ajax({
+                url: '{{route('checkImageExists')}}',
+                method: 'get',
+                data: {
+                  image: response.image
+                },
+                success: function(imageExists){
+                  console.log("Image exists:", imageExists);
+                  if(imageExists == 'true'){
+                  console.log("Image exists");
+
+                    $("#image").html(`<img src="storage/images_department/${response.image}" width="100" hight="auto" class="img-fluid img-thumbnail">`);
+
+                  }else{
+                  console.log("Show the default image");
+                    $("#image").html(`<img src="images/no-image.png" width="100" hight="auto" class="img-fluid img-thumbnail">`);
+
+                    
+                  }
+                }
+              });
+              
+            }else{
+              $("#image").html(`<img src="images/no-image.png" width="100" hight="auto" class="img-fluid img-thumbnail">`);
+              
+            }
+           
             $("#dep_id").val(response.id);
             $("#dep_image").val(response.image);
           }
@@ -249,7 +277,7 @@ data-bs-backdrop="static" aria-hidden="true">
         });
       });
 
-      // delete employee ajax request
+      // delete department ajax request
       $(document).on('click', '.deleteIcon', function(e) {
         e.preventDefault();
         let id = $(this).attr('id');

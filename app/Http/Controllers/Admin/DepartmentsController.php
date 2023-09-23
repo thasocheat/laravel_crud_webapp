@@ -35,9 +35,16 @@ class DepartmentsController extends Controller
             <tbody>';
 			foreach ($deps as $dep) {
 				$output .= '<tr>
-                <td>' . $dep->id . '</td>
-                <td><img src="storage/images_department/' . $dep->image . '" alt="'. $dep->name . '" width="50" hight="100" class="img-thumbnail rounded-circle"></td>
-                <td>' . $dep->name . '</td>
+                <td>' . $dep->id . '</td>';
+
+				$imagePath = 'storage/images_department/' . $dep->image;
+				if(!empty($dep->image) && file_exists($imagePath)){
+					$output .= '<td><img src="storage/images_department/' . $dep->image . '" alt="'. $dep->name . '" width="50" hight="100" class="img-thumbnail rounded-circle"></td>';
+				}else{
+					$output .= '<td><img src="images/no-image.png" alt="'. $dep->name . '" width="50" hight="100" class="img-thumbnail rounded-circle"></td>';
+
+				}                
+                $output .= '<td>' . $dep->name . '</td>
                 <td>' . $dep->slug . '</td>
                 <td>
                   <a href="#" id="' . $dep->id . '" class="text-success mx-1 editIcon" data-bs-toggle="modal" data-bs-target="#editDepartmentModal"><i class="bi-pencil-square h4"></i></a>
