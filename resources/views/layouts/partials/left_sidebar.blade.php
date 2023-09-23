@@ -14,30 +14,12 @@
           <b class="sub-arrow"></b>
         </li>
 
-        {{-- Vehicles --}}
         <li class="nav-item">
-            <a href="#" class="nav-link dropdown-toggle collapsed">
-              <i class="nav-icon fas fa-fw fa-bus-alt"></i>
-
-              <span class="nav-text fadeable">
-               <span>Manage Department</span>
-              </span>
-              <b class="caret fa fa-angle-left rt-n90"></b>
-            </a>
-            <div class="hideable submenu collapse">
-              <ul class="submenu-inner">
-
-                <li class="nav-item">
-                  <a href="{{route('admin.department.index')}}" class="nav-link">
-                    <span class="nav-text">
-                   <span>View Departments</span>
-                    </span>
-                  </a>
-                </li>
-
-              </ul>
-            </div>
-            <b class="sub-arrow"></b>
+          <a href="{{route('index')}}" class="nav-link">
+            <span class="nav-text">
+           <span>View Departments</span>
+            </span>
+          </a>
         </li>
         
 

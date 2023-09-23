@@ -34,56 +34,117 @@
         Home
         <small class="page-info text-dark-m3">
           <i class="fa fa-angle-double-right text-80"></i>
-          {{-- {{trans('cruds.user.title')}} --}}
           Manage Department
         </small>
       </h1>
     </div>
   @endsection
 
-  <div class="card bcard">
-    <div class="card-header bgc-info-d1 text-white border-0">
-      <h4><span><i class="fas fa-cog"></i></span> Manage Department</h4>
-      <div class="mb-2 mb-sm-0">
-        <a id="addNewObject" href="javascript:void(0)" class="btn btn-blue px-3 d-block w-100 text-95 radius-round border-2 brc-black-tp10">
-          <i class="fa fa-plus mr-1"></i>
-          Add <span class="d-sm-none d-md-inline"></span>
-          {{-- {{ trans('cruds.user.title_singular') }} --}}
-          Department Title
-        </a>
+  {{-- add new department modal start --}}
+<div class="modal fade" id="addDepartmentModal" tabindex="-1" aria-labelledby="departmentModalLabel"
+data-bs-backdrop="static" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="departmentModalLabel">Add New Department</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <form action="#" method="POST" id="add_department_form" enctype="multipart/form-data">
+      @csrf
+      <div class="modal-body p-4 bg-light">
+        <div class="row">
+
+          <div class="col-lg">
+            <label for="name">Department Name</label>
+            <input type="text" name="name" class="form-control" placeholder="Department Name" required>
+          </div>
+
+          <div class="col-lg">
+            <label for="slug">Slug Name</label>
+            <input type="text" name="slug" class="form-control" placeholder="Slug Name" required>
+          </div>
+
+        </div>
+       
+        <div class="my-2">
+          <label for="image">Select Avatar</label>
+          <input type="file" name="image" class="form-control" required>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" id="add_department_btn" class="btn btn-primary">Add Department</button>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+{{-- add new department modal end --}}
+
+{{-- edit department modal start --}}
+<div class="modal fade" id="editDepartmentModal" tabindex="-1" aria-labelledby="departmentModalLabel"
+data-bs-backdrop="static" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="departmentModalLabel">Edit Department</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <form action="#" method="POST" id="edit_department_form" enctype="multipart/form-data">
+      @csrf
+      <input type="hidden" name="dep_id" id="dep_id">
+      <input type="hidden" name="dep_image" id="dep_image">
+      <div class="modal-body p-4 bg-light">
+        <div class="row">
+
+          <div class="col-lg">
+            <label for="name">Department Name</label>
+            <input type="text" name="name" id="name" class="form-control" placeholder="Department Name" required>
+          </div>
+
+          <div class="col-lg">
+            <label for="slug">Slug Name</label>
+            <input type="text" name="slug" id="slug" class="form-control" placeholder="Slug Name" required>
+          </div>
+
+        </div>
+       
+        <div class="my-2">
+          <label for="image">Select Avatar</label>
+          <input type="file" name="image" class="form-control" required>
+        </div>
+        <div class="mt-2" id="image">
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" id="edit_department_btn" class="btn btn-success">Update Department</button>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+{{-- edit department modal end --}}
+
+<body class="bg-light">
+<div class="container">
+  <div class="row my-5">
+    <div class="col-lg-12">
+      <div class="card shadow">
+        <div class="card-header bg-danger d-flex justify-content-between align-items-center">
+          <h3 class="text-light">Manage Department</h3>
+          <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#addDepartmentModal"><i
+              class="bi-plus-circle me-2"></i>Add New Department</button>
+        </div>
+        <div class="card-body" id="show_all_departments">
+          <h1 class="text-center text-secondary my-5">Loading...</h1>
+        </div>
       </div>
     </div>
-    <div class="card-body p-0 border-x-1 border-b-1 brc-default-m4 radius-0 overflow-hidden">
-      <table id="my_datatable" class="table text-dark-m2 text-95 bgc-white ml-n1px" id="table">
-        <thead class="bgc-white text-white text-uppercase text-100">
-          <tr class="bgc-primary text-white brc-black-tp10">
-            <th>ID</th>
-            <th>Name</th>
-            <th>Slug</th>
-            <th>Photo</th>
-            <th>Created At</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody id="objectList">
-          @foreach ($departments as $row)
-            <tr id="tr_object_id_{{ $row->id }}" class="bgc-h-orange-l4">
-              <td>{{ $row->id }}</td>
-              <td>{{ $row->name }}</td>
-              <td>{{ $row->slug }}</td>
-              <td><img width="48" src="{{ asset('uploads') . '/' . $row->image }}" alt="{{ $row->image }}"></td>
-              <td>{{ date('d-M-Y',strtotime($row->created_at)) }}</td>
-              <td>
-                @include('admin.templates.crudAction')
-              </td>
-            </tr>
-          @endforeach
-        </tbody>
-      </table>
-    </div>
   </div>
-
-  @include('admin.department.templates.crudModal')
+</div>
 @endsection
 
 @push('vendor-scripts')
@@ -106,130 +167,93 @@
   <script src="{{asset('backend2')}}/vendors/sweetalert2/sweetalert2.all.min.js"></script>
   {{-- <script src="{{asset('backend2')}}//views/pages/table-datatables/@page-script.js"></script> --}}
   <script>
-    $(document).ready(function() {
-     //Default data table
-      var table = $('#my_datatable').DataTable( {
-       lengthChange: false,
-       buttons: [ 'copy', 'excel', 'pdf', 'print','colvis' ]
-      } );
-      table.buttons().container()
-        .appendTo( '#my_datatable_wrapper .col-md-6:eq(0)' );
-      $(function () {
-        "use strict";
-        $('[data-bs-toggle="tooltip"]').tooltip();
+    $(function() {
 
-        // ពេលប្រើ Select2
-        // $('#frmCrudObject').find('.select2').select2({
-        //   allowClear: true,
-        //   dropdownParent: $('#select2-parent'),
-        //   width:'100%'
-        // });
-
-      });
-    });
-  </script>
-
-  <script>
-    $(document).ready(function () {
-      $.ajaxSetup({
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-      });
-      $('#addNewObject').on('click',function(e){
+      // add new department ajax request
+      $("#add_department_form").submit(function(e) {
         e.preventDefault();
-        $('#crudObjectModal').find('.modal-title').html('Add Department');
-        $('#frmCrudObject').find('#object_id').val('');
-        $('#frmCrudObject').find('#btnObjectSave').html(`<i class="far fa-save text-danger-tp1 radius-round mr-1 align-middle pt-10"></i>
-                                                        <span class="align-middle pl-1 pr-2">Save</span>`);
-        $('#frmCrudObject').find('#btnObjectSave').removeClass('d-none');
-        $('#frmCrudObject').find('#btnObjectUpdate').addClass('d-none');
-        $('#frmCrudObject').trigger('reset');
-        $('#crudObjectModal').modal('show');
-      });
-
-      $('#frmCrudObject').on('submit',function(e){
-        e.preventDefault();
-
-        var actionUrl = $(this).attr('action');
-        var method = $(this).attr('method')
-        $('#btnObjectSave').html('Processing..');
-        $('#btnObjectUpdate').html('Processing..');
+        const fd = new FormData(this);
+        $("#add_department_btn").text('Adding...');
         $.ajax({
-          type: method,
-          url: actionUrl,
-          data: new FormData(this),
-          processData:false,
-          dataType:'json',
-          contentType:false,
-          beforeSend:function(){
-            $(document).find('span.error-text').text('');
-          },
-          success: function (res) {
-            console.log(res)
-            if(res.status==400){
-              $.each(res.error, function(prefix, val){
-                $('span.'+prefix+'_error').text(val[0]);
-              });
-            } else {
-              var $html = $(res.html);
-              if(res.type == 'store-object'){
-                $('tbody#objectList').append($html);
-              }else{
-                $("#tr_object_id_" + res.data.id).replaceWith($html);
-              }
-              $('#frmCrudObject').trigger("reset");
-                $('#btnObjectSave').html('Save');
-              $('#btnObjectUpdate').html('Update');
-              toastr.success(res.success);
-              $('#crudObjectModal' ).modal('hide');
+          url: '{{ route('store') }}',
+          method: 'post',
+          data: fd,
+          cache: false,
+          contentType: false,
+          processData: false,
+          dataType: 'json',
+          success: function(response) {
+            if (response.status == 200) {
+              Swal.fire(
+                'Added!',
+                'Department Added Successfully!',
+                'success'
+              )
+              fetchAllDepartments();
             }
-          },
-          error: function (error) {
-            console.log('Error:', error);
-            $('#btnObjectSave').html('Save');
-            $('#btnObjectUpdate').html('Update');
+            $("#add_department_btn").text('Add Department');
+            $("#add_department_form")[0].reset();
+            $("#addDepartmentModal").modal('hide');
           }
         });
       });
 
-      $('body').on('click', 'a#objectEdit', function (e) {
+      // edit department ajax request
+      $(document).on('click', '.editIcon', function(e) {
         e.preventDefault();
-        $('#frmCrudObject').find('#btnObjectSave').addClass('d-none');
-        $('#frmCrudObject').find('#btnObjectUpdate').removeClass('d-none');
-        $('#frmCrudObject').find('#btnObjectUpdate').html('<i class="fadeIn animated bx bx-edit"></i>&nbsp;Update');
-        $('#frmCrudObject').trigger('reset');
-        var object_id = $(this).data('id');
-        var form = $('#frmCrudObject');
-        var modal = $('#crudObjectModal');
-        var actionUrl = $('#crudRoutePath').val();
-        modal.find('.modal-title').html('{{ trans('global.edit') }} {{ trans('cruds.user.title_singular') }}');
-        $.get( actionUrl +'/' +object_id+'/edit', function (res) {
-          form.find('#object_id').val(res.data.id);
-          var selectRoles = [];
-          $.each(res.data.roles,function(i,e){
-            selectRoles.push(e.id)
-          })
-          // console.log(selectRoles);
-          // $('.select2').val(selectRoles).trigger('change');
-          form.find('#name').val(res.data.name);
-          form.find('#slug').val(res.data.slug);
-
-          form.find('#old_image').val(res.data.image);
-          if(res.data.image==null){
-            form.find('#showPhoto').attr('src',"{{asset('images/no-image.png')}}");
-          } else {
-            form.find('#showPhoto').attr('src',"{{ asset('uploads/') }}"+'/'+res.data.image);
+        let id = $(this).attr('id');
+        $.ajax({
+          url: '{{ route('edit') }}',
+          method: 'get',
+          data: {
+            id: id,
+            _token: '{{ csrf_token() }}'
+          },
+          success: function(response) {
+            $("#name").val(response.name);
+            $("#slug").val(response.slug);
+            $("#image").html(
+              `<img src="storage/images/${response.image}" width="100" class="img-fluid img-thumbnail">`);
+            $("#dep_id").val(response.id);
+            $("#dep_image").val(response.image);
           }
-          modal.modal('show');
-        })
+        });
       });
 
-      $('body').on('click', '.objectDelete', function (e) {
+      // update department ajax request
+      $("#edit_department_form").submit(function(e) {
         e.preventDefault();
-        var object_id = $(this).data("id");
-        var link = $(this).attr("href");
-        // alert("Hello Delete"+ link);
+        const fd = new FormData(this);
+        $("#edit_department_btn").text('Updating...');
+        $.ajax({
+          url: '{{ route('update') }}',
+          method: 'post',
+          data: fd,
+          cache: false,
+          contentType: false,
+          processData: false,
+          dataType: 'json',
+          success: function(response) {
+            if (response.status == 200) {
+              Swal.fire(
+                'Updated!',
+                'Department Updated Successfully!',
+                'success'
+              )
+              fetchAllDepartments();
+            }
+            $("#edit_department_btn").text('Update Department');
+            $("#edit_department_form")[0].reset();
+            $("#editDepartmentModal").modal('hide');
+          }
+        });
+      });
+
+      // delete employee ajax request
+      $(document).on('click', '.deleteIcon', function(e) {
+        e.preventDefault();
+        let id = $(this).attr('id');
+        let csrf = '{{ csrf_token() }}';
         Swal.fire({
           title: 'Are you sure?',
           text: "You won't be able to revert this!",
@@ -239,32 +263,43 @@
           cancelButtonColor: '#d33',
           confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
-          if (result.value) {
+          if (result.isConfirmed) {
             $.ajax({
-              type: "DELETE",
-              url:link,
-              success: function (data) {
-                console.log(data);
-                $("#tr_object_id_" + object_id).remove();
-                toastr.success(data.success);
+              url: '{{ route('delete') }}',
+              method: 'delete',
+              data: {
+                id: id,
+                _token: csrf
               },
-              error: function (data) {
-                console.log('Error:', data);
+              success: function(response) {
+                console.log(response);
+                Swal.fire(
+                  'Deleted!',
+                  'Your file has been deleted.',
+                  'success'
+                )
+                fetchAllDepartments();
               }
             });
           }
         })
       });
 
-      $('#btnObjectClose').on('click',function(e){
-        e.preventDefault();
-        $('#frmCrudObject').find('#btnObjectSave').removeClass('d-none');
-        $('#frmCrudObject').find('#btnObjectUpdate').addClass('d-none');
-        $('#crudObjectModal').find('.modal-title').html('{{ trans('global.add') }} {{ trans('cruds.user.title_singular') }}');
-        $('#frmCrudObject').trigger('reset');
-      });
+      // fetch all department ajax request
+      fetchAllDepartments();
 
-      
+      function fetchAllDepartments() {
+        $.ajax({
+          url: '{{ route('fetchAll') }}',
+          method: 'get',
+          success: function(response) {
+            $("#show_all_departments").html(response);
+            $("table").DataTable({
+              order: [0, 'desc']
+            });
+          }
+        });
+      }
     });
   </script>
 

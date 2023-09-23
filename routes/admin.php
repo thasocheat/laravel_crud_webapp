@@ -28,16 +28,21 @@ All Admin Routes List
 --------------------------------------------*/
 // Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/home', [HomeController::class, 'adminHome'])->name('admin.home');
-Route::group(['prefix'=>'admin','as'=>'admin.','middleware'=>['auth']],function(){
+// Route::group(['prefix'=>'admin','as'=>'admin.','middleware'=>['auth']],function(){
 
   
 
 
 
     // Department Routes
-    Route::resource('department', App\Http\Controllers\Admin\DepartmentsController::class)->except('create','update');
+    Route::get('/department', [DepartmentsController::class, 'index'])->name('index');
+    Route::post('/store', [DepartmentsController::class, 'store'])->name('store');
+    Route::get('/fetchall', [DepartmentsController::class, 'fetchAll'])->name('fetchAll');
+    Route::delete('/delete', [DepartmentsController::class, 'delete'])->name('delete');
+    Route::get('/edit', [DepartmentsController::class, 'edit'])->name('edit');
+    Route::post('/update', [DepartmentsController::class, 'update'])->name('update');
 
-});
+// });
   
 /*------------------------------------------
 --------------------------------------------

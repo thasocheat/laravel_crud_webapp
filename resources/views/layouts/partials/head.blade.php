@@ -16,6 +16,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Hanuman:wght@100;300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('assets/fontawesome.css')}}">
     <link rel="stylesheet" href="{{asset('assets/bootstrap-icon/bootstrap-icons-9f7ec267.css')}}">
+
+
+
+
+
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css' />
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css' />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.10.25/datatables.min.css" />
+
+
+
+
     @stack('vendor-styles')
     <!-- include fonts -->
     <link rel="stylesheet" type="text/css" href="{{asset('backend2')}}/dist/css/ace-font.css">
