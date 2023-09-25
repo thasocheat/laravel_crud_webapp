@@ -87,6 +87,10 @@
                 <i class="fa fa-user text-primary-m1 text-105 mr-1"></i>
                 Profile
               </a>
+              <a class="mt-1 dropdown-item btn btn-outline-grey bgc-h-primary-l3 btn-h-light-primary btn-a-light-primary" href="{{route('admin.home')}}">
+                <i class="fa fa-user text-primary-m1 text-105 mr-1"></i>
+                Go To Front Page
+              </a>
               <a class="dropdown-item btn btn-outline-grey bgc-h-success-l3 btn-h-light-success btn-a-light-success" href="#" data-toggle="modal" data-target="#id-ace-settings-modal">
                 <i class="fa fa-cog text-success-m1 text-105 mr-1"></i>
                 Settings

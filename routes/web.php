@@ -16,9 +16,9 @@ use App\Http\Controllers\HomeController;
 */
 
 
-Route::get('/', function () {
-    return view('frontpage.index');
-});
+// Route::get('/', function () {
+//     return view('frontpage.home.index');
+// })->name('front_page');
 
 Auth::routes();
 

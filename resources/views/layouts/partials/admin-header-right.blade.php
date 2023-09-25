@@ -111,7 +111,7 @@
         <a class="dropdown-item" href="profile.html"
           ><i class="dw dw-settings2"></i> Setting</a
         >
-        <a class="dropdown-item" href="faq.html"
+        <a class="dropdown-item" href="{{route('front_page')}}"
           ><i class="dw dw-help"></i> Help</a
         >
         {{-- <a class="dropdown-item" href="login.html"
